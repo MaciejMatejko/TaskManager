@@ -1,10 +1,13 @@
 {% extends "::base.html.twig" %}    
 
-{% block title %}Main page{% endblock %}
+{% block title %}{{ user.username }}'s main page{% endblock %}
 {% block stylesheets %}{% endblock %}
 
 {% block body %}
-    {{ user.username }}
-    {% %}
-    {% %}
+    {% include "FOSUserBundle:Profile:show_content.html.twig" %}
+    {% if user.team is not null%}
+        <p>user.team</p>
+    {% else %}
+        <p>You aren't in any team yet</p>
+    {% endif %}
 {% endblock %}

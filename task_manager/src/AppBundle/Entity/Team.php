@@ -25,9 +25,9 @@ class Team
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255)
      */
-    private $title;
+    private $name;
 
     /**
      * @var string
@@ -69,26 +69,26 @@ class Team
     }
 
     /**
-     * Set title
+     * Set name
      *
-     * @param string $title
+     * @param string $name
      * @return Team
      */
-    public function setTitle($title)
+    public function setName($name)
     {
-        $this->title = $title;
+        $this->name = $name;
 
         return $this;
     }
 
     /**
-     * Get title
+     * Get name
      *
      * @return string 
      */
     public function getTitle()
     {
-        return $this->title;
+        return $this->name;
     }
 
     /**
@@ -145,5 +145,17 @@ class Team
     public function getUsers()
     {
         return $this->users;
+    }
+    
+    public function __toString()
+    {
+        echo("<p>".$this->getName()."</p>");
+        if(count($this->getUsers()>0)){
+            echo("<ul>");
+            foreach($this->getUsers() as $user){
+                echo("<li>".$user->getName()."</li>");
+            }
+            echo("</ul>");
+        }
     }
 }
