@@ -44,11 +44,22 @@ class Team
     private $users;
     
     /**
-     * Get id
-     *
-     * @return integer 
+     *@var ArrayCollection
+     * 
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Task", mappedBy="team")
      */
-
+    private $tasks;
+    
+    
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->users = new ArrayCollection();
+        $this->tasks = new ArrayCollection();
+    }
+    
     /**
      * Get id
      *
@@ -60,14 +71,6 @@ class Team
         return $this->id;
     }
     
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->users = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
     /**
      * Set name
      *
@@ -157,5 +160,48 @@ class Team
             }
             echo("</ul>");
         }
+    }
+
+    /**
+     * Get name
+     *
+     * @return string 
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Add tasks
+     *
+     * @param \AppBundle\Entity\Task $task
+     * @return Team
+     */
+    public function addTask(\AppBundle\Entity\Task $task)
+    {
+        $this->tasks[] = $task;
+
+        return $this;
+    }
+
+    /**
+     * Remove tasks
+     *
+     * @param \AppBundle\Entity\Task $task
+     */
+    public function removeTask(\AppBundle\Entity\Task $task)
+    {
+        $this->tasks->removeElement($task);
+    }
+
+    /**
+     * Get tasks
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTasks()
+    {
+        return $this->tasks;
     }
 }

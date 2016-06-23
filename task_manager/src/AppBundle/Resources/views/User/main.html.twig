@@ -6,7 +6,7 @@
 {% block body %}
     {% include "FOSUserBundle:Profile:show_content.html.twig" %}
     {% if user.team is not null%}
-        <p>user.team</p>
+        <p>{{ user.team.name }}</p>
     {% else %}
         <p>You aren't in any team yet</p>
     {% endif %}

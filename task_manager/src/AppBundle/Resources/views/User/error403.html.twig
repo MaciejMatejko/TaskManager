@@ -1,0 +1,9 @@
+{% extends "::base.html.twig" %}    
+
+{% block title %}Access denied{% endblock %}
+{% block stylesheets %}{% endblock %}
+
+{% block body %}
+    <p>You cannot enter this page</p>
+    <a href="{{ path("app_user_main") }}">Main page</a>
+{% endblock %}

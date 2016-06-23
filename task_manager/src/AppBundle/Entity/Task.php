@@ -36,6 +36,13 @@ class Task
      */
     private $description;
     
+     /**
+     * @var type Team
+     * 
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Team", inversedBy="tasks")
+     */
+    protected $team;
+    
     /**
      * Get id
      *
@@ -45,8 +52,6 @@ class Task
     {
         return $this->id;
     }
-    
-    
 
 
     /**
@@ -93,5 +98,28 @@ class Task
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * Set team
+     *
+     * @param \AppBundle\Entity\Team $team
+     * @return Task
+     */
+    public function setTeam(\AppBundle\Entity\Team $team = null)
+    {
+        $this->team = $team;
+
+        return $this;
+    }
+
+    /**
+     * Get team
+     *
+     * @return \AppBundle\Entity\Team 
+     */
+    public function getTeam()
+    {
+        return $this->team;
     }
 }
