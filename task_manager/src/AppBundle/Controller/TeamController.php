@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use AppBundle\Entity\Team;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
@@ -124,7 +125,7 @@ class TeamController extends Controller
     }
     
     /**
-     * @Route("{id}/{userId}/remove")
+     * @Route("/{id}/{userId}/remove")
      */
     public function removeAction($id, $userId)
     {
@@ -141,8 +142,8 @@ class TeamController extends Controller
         }
         
         $em = $this->getDoctrine()->getManager();
-        $user->setTeam(null);
         $team->removeUser($user);
+        $user->setTeam(null);
         $em->flush();
         
         return $this->redirectToRoute("app_team_edit", ["id" => $id]);

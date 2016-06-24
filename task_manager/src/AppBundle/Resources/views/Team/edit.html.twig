@@ -5,7 +5,7 @@
     {{ form(form) }}
     <ul>
     {% for user in team.users %}
-        <li>{{ user.username }} <a href="{{ path("app_team_remove", {"id":team.id, "userId": user.id}) }}">Remove user</a><li>
+        <li>{{ user.username }} <a href="{{ path("app_team_remove", {"id":team.id, "userId": user.id}) }}">Remove user</a></li>
     {% endfor %}
-    <ul>
+    </ul>
 {% endblock %}
