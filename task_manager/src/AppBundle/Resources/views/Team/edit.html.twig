@@ -1,16 +1,11 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Team edit</h1>
-
-    {{ form(edit_form) }}
-
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('team') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+    <h1>Team editing</h1>
+    {{ form(form) }}
+    <ul>
+    {% for user in team.users %}
+        <li>{{ user.username }} <a href="{{ path("app_team_remove", {"id":team.id, "userId": user.id}) }}">Remove user</a><li>
+    {% endfor %}
+    <ul>
 {% endblock %}
