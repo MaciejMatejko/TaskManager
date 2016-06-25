@@ -9,5 +9,9 @@
         <p><a href="{{ path("app_team_show", {"id": user.team.id}) }}">{{ user.team.name }}</a></p>
     {% else %}
         <p>You aren't in any team yet</p>
-    {% endif %}
+    {% endif %}  
+    {% if is_granted('ROLE_MANAGER') %}
+       <p><a href="{{ path("app_team_new") }}">New Team</a></p>
+       <p><a href="{{ path("app_task_new") }}">New Task</a></p>
+    {% endif%}
 {% endblock %}

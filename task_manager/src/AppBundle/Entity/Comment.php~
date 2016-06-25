@@ -20,6 +20,33 @@ class Comment
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+    
+    /**
+    * @var string
+    *
+    * @ORM\Column(name="title", type="string", length=255)
+    */
+    private $title;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text")
+     */
+    private $content;
+    
+    /**
+    * @var type Team
+    * 
+    * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Task", inversedBy="commentss")
+    */
+    private $task;
+    
+    /**
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
+     */
+    private $user;
 
 
     /**

@@ -44,6 +44,57 @@ class Task
     protected $team;
     
     /**
+     *@var ArrayCollection
+     * 
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Comment", mappedBy="task", cascade={"remove"})
+     */
+    private $comments;
+    
+    /**
+     *
+     * @var \DateTime
+     * 
+     * @ORM\Column(name="creationDate", type="date")
+     */
+    private $creationDate;
+    
+    /**
+     *
+     * @var \DateTime
+     * 
+     * @ORM\Column(name="deadline", type="date")
+     */
+    private $deadline;
+    
+    /**
+     *
+     * @var type string
+     * 
+     * @ORM\Column(name="priority", type="string", length=255)
+     */
+    private $priority;
+    
+    /**
+     *
+     * @var type boolean
+     * 
+     * @ORM\Column(name="active", type="boolean")
+     */
+    private $active;
+
+
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->comments = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->creationDate = date_create();
+        $this->active = true;
+    }
+    
+    /**
      * Get id
      *
      * @return integer 
@@ -121,5 +172,145 @@ class Task
     public function getTeam()
     {
         return $this->team;
+    }
+
+    /**
+     * Add comments
+     *
+     * @param \AppBundle\Entity\Comment $comment
+     * @return Task
+     */
+    public function addComment(\AppBundle\Entity\Comment $comment)
+    {
+        $this->comments[] = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Remove comments
+     *
+     * @param \AppBundle\Entity\Comment $comment
+     */
+    public function removeComment(\AppBundle\Entity\Comment $comment)
+    {
+        $this->comments->removeElement($comment);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
+
+    /**
+     * Set creationDate
+     *
+     * @param \DateTime $creationDate
+     * @return Task
+     */
+    public function setCreationDate($creationDate)
+    {
+        $this->creationDate = $creationDate;
+
+        return $this;
+    }
+
+    /**
+     * Get creationDate
+     *
+     * @return \DateTime 
+     */
+    public function getCreationDate()
+    {
+        return $this->creationDate;
+    }
+
+    /**
+     * Set deadline
+     *
+     * @param \DateTime $deadline
+     * @return Task
+     */
+    public function setDeadline($deadline)
+    {
+        $this->deadline = $deadline;
+
+        return $this;
+    }
+
+    /**
+     * Get deadline
+     *
+     * @return \DateTime 
+     */
+    public function getDeadline()
+    {
+        return $this->deadline;
+    }
+
+    /**
+     * Set priority
+     *
+     * @param string $priority
+     * @return Task
+     */
+    public function setPriority($priority)
+    {
+        if($priority == "low" || $priority == "normal" || $priority == "high"){
+                    $this->priority = $priority;
+
+                    return $this;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Get priority
+     *
+     * @return string 
+     */
+    public function getPriority()
+    {
+        return $this->priority;
+    }
+
+    /**
+     * Activate
+     *
+     * @return Task
+     */
+    public function activate()
+    {
+        $this->active = true;
+
+        return $this;
+    }
+    
+     /**
+     * Deactivate
+     *
+     * @return Task
+     */
+    public function deactivate()
+    {
+        $this->active = false;
+
+        return $this;
+    }
+
+    /**
+     * Is active
+     *
+     * @return boolean 
+     */
+    public function isActive()
+    {
+        return $this->active;
     }
 }

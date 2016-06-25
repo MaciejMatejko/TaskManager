@@ -39,14 +39,14 @@ class Team
     /**
      *@var ArrayCollection
      * 
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\User", mappedBy="team")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\User", mappedBy="team",)
      */
     private $users;
     
     /**
      *@var ArrayCollection
      * 
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Task", mappedBy="team")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Task", mappedBy="team", cascade={"remove"})
      */
     private $tasks;
     
@@ -57,6 +57,7 @@ class Team
     public function __construct()
     {
         $this->users = new ArrayCollection();
+        $this->tasks = new ArrayCollection();
     }
     
     /**
@@ -159,5 +160,48 @@ class Team
             }
             echo("</ul>");
         }
+    }
+
+    /**
+     * Get name
+     *
+     * @return string 
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Add tasks
+     *
+     * @param \AppBundle\Entity\Task $task
+     * @return Team
+     */
+    public function addTask(\AppBundle\Entity\Task $task)
+    {
+        $this->tasks[] = $task;
+
+        return $this;
+    }
+
+    /**
+     * Remove tasks
+     *
+     * @param \AppBundle\Entity\Task $task
+     */
+    public function removeTask(\AppBundle\Entity\Task $task)
+    {
+        $this->tasks->removeElement($task);
+    }
+
+    /**
+     * Get tasks
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTasks()
+    {
+        return $this->tasks;
     }
 }

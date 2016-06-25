@@ -25,11 +25,14 @@ class User extends BaseUser
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Team", inversedBy="users")
      */
     protected $team;
+    
 
     public function __construct()
     {
         parent::__construct();
         // your own logic
+        $this->roles=["ROLE_USER"];
+        
     }
     
     

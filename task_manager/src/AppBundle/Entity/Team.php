@@ -39,14 +39,14 @@ class Team
     /**
      *@var ArrayCollection
      * 
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\User", mappedBy="team")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\User", mappedBy="team",)
      */
     private $users;
     
     /**
      *@var ArrayCollection
      * 
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Task", mappedBy="team")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Task", mappedBy="team", cascade={"remove"})
      */
     private $tasks;
     
